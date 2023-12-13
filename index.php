@@ -1,33 +1,13 @@
 <?php
+include __DIR__ . "/partials/function.php";
+
 $email_valid = '';
 
 if (isset($_GET['InputEmail'])) {
     $input_email =  $_GET['InputEmail'];
     $array_email = str_split($input_email, 1);
-    $flag_point = false;
-    $flag_snail = false;
-    for ($i = 0; $i < count($array_email); $i++) {
-
-        if ($array_email[$i] != ' ') {
-
-            if ($array_email[$i] === '.' || $flag_point) {
-                $flag_point = true;
-
-                if ($array_email[$i] === '@' || $flag_snail) {
-                    $flag_snail === true;
-                    $email_valid = 'email valida';
-                } else {
-                    $email_valid = 'emial non contiene la chiocciola';
-                }
-
-            } else {
-                $email_valid = 'email non contine punti';
-            }
-            
-        } else {
-            $email_valid = 'email contine spazi';
-        }
-    }
+    
+    $email_valid = emailValidator($array_email);
 } else {
     $email_valid = 'email non presente';
 }
